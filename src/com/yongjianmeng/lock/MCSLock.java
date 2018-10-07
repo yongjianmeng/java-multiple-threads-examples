@@ -3,12 +3,10 @@ package com.yongjianmeng.lock;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
 public class MCSLock {
-
     public static class MCSNode {
         volatile MCSNode next;
         volatile boolean isLocked = true;
     }
-
     private static final ThreadLocal<MCSNode> NODE = new ThreadLocal<>();
     private volatile MCSNode queue;
     private static final AtomicReferenceFieldUpdater<MCSLock, MCSNode> UPDATER =
